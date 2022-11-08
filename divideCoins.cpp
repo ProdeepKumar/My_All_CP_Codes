@@ -49,30 +49,9 @@ ll n,m,k,g,mx,mn,res,ans,sum,c,x,y,z,w,p,q,r,l,s,t;
 void solve()
 {
     ci>>n;
-    vector<ll>a;
-    f(i,0,n) ci>>x,a.pb(x);
-    sort(all(a));
-    a.erase(unique(all(a)),a.end());
-    if(a.size()==1) co<<0<<endl;
-    else if(a.size()==2) co<<2*(a[1]-a[0])<<endl;
-    else
-    {
-        res=0;
-        f(i,0,a.size()-1)
-        {
-            x=a.back()-a[i];
-            y=a[i+1]-a[i];
-            res=max(res,x+y);
-        }
-        reverse(all(a));
-        f(i,0,a.size()-1)
-        {
-            x=a[i]-a.back();
-            y=a[i]-a[i+1];
-            res=max(res,x+y);
-        }
-        co<<res<<endl;
-    } 
+    sum=0;
+    vector<ll>a(n);
+    for(auto &x:a) ci>>x,sum+=x;
     
 }
 

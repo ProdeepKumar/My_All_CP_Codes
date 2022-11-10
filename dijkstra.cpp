@@ -24,7 +24,7 @@ using namespace std;
 #define i64        long long
 #define PI         2*acos(0.0)
 #define MAXN       3*100000
-#define infinity 1<<30  //2^30
+#define infinity   1<<30  //2^30
 
 vector<ll>g[100001], cost[100001];
 ll parent[100001],dis[100001];

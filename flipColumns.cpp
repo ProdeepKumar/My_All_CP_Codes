@@ -44,11 +44,46 @@ typedef tree<int, null_type, less<int>, rb_tree_tag,
 // find_by_order(k) - k'th element in set.(0 indexed)(iterator)
 ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 
+ll calc(ll a[50][50])
+{
+    ll cnt=0;
+    f(i,0,n)
+    {
+        bool no=false;
+        f(j,0,m)
+        {
+            if(a[i][j]!=1) no=true;
+        }
+        if(!no) cnt++;
+    }
+    return cnt;
+}
+
+void call(ll a[50][50],ll baki)
+{
+    if(baki==0)
+    {
+        res=max(res,calc(a));
+        return;
+    }
+    f(j,0,m)
+    {
+        ll b[50][50];
+        f(ii,0,n) f(jj,0,m) b[ii][jj]=a[ii][jj];
+        f(i,0,n) a[i][j]=1-a[i][j];
+        call(a,baki-1);
+        f(ii,0,n) f(jj,0,m) a[ii][jj]=b[ii][jj];
+    }
+}
+
 void solve()
 {
-    ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
+    ci>>n>>m>>k;
+    ll a[50][50];
+    f(i,0,n) f(j,0,m) ci>>a[i][j];
+    res=0;
+    call(a,k);
+    co<<res<<endl;
 }
 
 int main()
@@ -63,8 +98,8 @@ int main()
         cout << setprecision(10) << fixed;
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
-        ci>>t;
-        //t=1;
+        t=1;
+        // ci>>t;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

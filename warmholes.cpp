@@ -44,9 +44,9 @@ int call(int i,int j,int sum)
 int main()
 {
     cin>>t;
-    cin>>n>>sourcex>>sourcey>>destx>>desty;
     while(t--)
     {
+        cin>>n>>sourcex>>sourcey>>destx>>desty;
         for(int i=0;i<n;i++)
         {
             vis[i]=0;

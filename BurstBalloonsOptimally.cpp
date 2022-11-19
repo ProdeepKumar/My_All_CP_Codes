@@ -1,26 +1,30 @@
 #include<iostream>
 using namespace std;
 
-int n,a[50],vis[50];
+int n,a[50],vis[50],dp[50],res;
 
-bool check()
-{
-    for(int i=0;i<n;i++)
-    {
-        if(vis[i]==0) return false;
-    }
-    return true;
-}
+// bool check()
+// {
+//     for(int i=0;i<n;i++)
+//     {
+//         if(vis[i]==0) return false;
+//     }
+//     return true;
+// }
 
-int call(int sum)
+void call(int sum,int baki)
 {
     // cout<<sum<<endl;
-    if(check()) return sum;
-    int xx,res=0;
+    if(baki==0)
+    {
+        res=max(res,sum);
+        return;
+    }
     for(int i=0;i<n;i++)
     {
         if(vis[i]==0)
         {
+            // if(dp[i]!=-1) return dp[i];
             int mul=1;
             vis[i]=1;
             int l=i-1,r=i+1;
@@ -29,15 +33,19 @@ int call(int sum)
             if(l>=0) mul*=a[l];
             if(r<n) mul*=a[r];
             if(l<0 && r>=n) mul=a[i];
-            xx=call(sum+mul);
-            res=max(res,xx);
+            call(sum+mul,baki-1);
+            // res=max(res,xx);
+            // dp[i]=res;
             vis[i]=0;
         }
     }
-    return res;
+    return;
 }
 int main(){
     cin>>n;
     for(int i=0;i<n;i++) cin>>a[i],vis[i]=0;
-    cout<<call(0)<<endl;
+    res=-100;
+    call(0,n);
+    // for(int i=0;i<50;i++) dp[i]=-1;
+    cout<<res<<endl;
 }

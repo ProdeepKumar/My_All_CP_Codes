@@ -60,22 +60,22 @@ int call(int i,int j,int baki)
         if(L==0) continue;
         // cout<<X<<' '<<Y<<endl;
         res++;
-        if(valid(X,Y-1) && left(X,Y) && right(X,Y-1) && !vis[X][Y-1])
+        if(valid(X,Y-1) && left(X,Y) && right(X,Y-1) && !vis[X][Y-1]) // Go left
         {
             push({X,Y-1,L-1});
             vis[X][Y-1]=1;
         }
-        if(valid(X,Y+1) && right(X,Y) && left(X,Y+1) && !vis[X][Y+1])
+        if(valid(X,Y+1) && right(X,Y) && left(X,Y+1) && !vis[X][Y+1]) // Go right
         {
             push({X,Y+1,L-1});
             vis[X][Y+1]=1;
         }
-        if(valid(X-1,Y) && up(X,Y) && down(X-1,Y) && !vis[X-1][Y])
+        if(valid(X-1,Y) && up(X,Y) && down(X-1,Y) && !vis[X-1][Y]) // Go up
         {
             push({X-1,Y,L-1});
             vis[X-1][Y]=1;
         }
-        if(valid(X+1,Y) && down(X,Y) && up(X+1,Y) && !vis[X+1][Y])
+        if(valid(X+1,Y) && down(X,Y) && up(X+1,Y) && !vis[X+1][Y]) // Go down
         {
             push({X+1,Y,L-1});
             vis[X+1][Y]=1;

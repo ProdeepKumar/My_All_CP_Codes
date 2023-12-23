@@ -50,6 +50,21 @@ void solve()
     ci>>n;
     vector<ll>a(n);
     for(auto &x:a) ci>>x;
+    ll left[n],right[n];
+    left[0]=right[n-1]=1;
+    f(i,1,n)
+    {
+        if(a[i]>=a[i-1]) left[i]=left[i-1]+1;
+        else left[i]=1;
+    }
+    r(i,n-2,0)
+    {
+        if(a[i]>=a[i+1]) right[i]=right[i+1]+1;
+        else right[i]=1;
+    }
+    res=0;
+    f(i,0,n) res=max(res,left[i]+right[i]-1);
+    co<<res<<endl;
     
      
 }
@@ -67,7 +82,7 @@ int main()
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         t=1;
-        ci>>t;
+        // ci>>t;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

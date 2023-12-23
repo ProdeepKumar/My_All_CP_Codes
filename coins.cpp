@@ -42,15 +42,38 @@ typedef tree<int, null_type, less<int>, rb_tree_tag,
         tree_order_statistics_node_update>Set;
 // order_of_key(k) - number of element strictly less than k
 // find_by_order(k) - k'th element in set.(0 indexed)(iterator)
-ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
+ll n,m,k,g,mx,mn,res,x,y,z,w,p,q,r,b,d,l,s,t;
 
 
 void solve()
 {
-    ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
-    
+    string a,b,c;
+    ci>>a>>b>>c;
+    ll ar[3]={0};
+    if(a[1]=='<') ar[a[0]-'A']++;
+    else ar[a[2]-'A']++;
+    if(b[1]=='<') ar[b[0]-'A']++;
+    else ar[b[2]-'A']++;
+    if(c[1]=='<') ar[c[0]-'A']++;
+    else ar[c[2]-'A']++;
+    set<ll>st;
+    st.insert(ar[0]);
+    st.insert(ar[1]);
+    st.insert(ar[2]);
+    if(st.size()!=3) co<<"Impossible"<<endl;
+    else 
+    {
+        if(ar[0]==2) co<<'A';
+        else if(ar[1]==2) co<<'B';
+        else if(ar[2]==2) co<<'C';
+        if(ar[0]==1) co<<'A';
+        else if(ar[1]==1) co<<'B';
+        else if(ar[2]==1) co<<'C';
+        if(ar[0]==0) co<<'A';
+        else if(ar[1]==0) co<<'B';
+        else if(ar[2]==0) co<<'C';
+        en
+    }
      
 }
 
@@ -67,7 +90,7 @@ int main()
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         t=1;
-        ci>>t;
+        // ci>>t;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

@@ -42,16 +42,23 @@ typedef tree<int, null_type, less<int>, rb_tree_tag,
         tree_order_statistics_node_update>Set;
 // order_of_key(k) - number of element strictly less than k
 // find_by_order(k) - k'th element in set.(0 indexed)(iterator)
-ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
+ll n,m,k,g,mx,mn,res,x,y,z,w,p,q,r,b,d,l,s,t;
 
 
 void solve()
 {
     ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
-    
-     
+    vector<ll>a(n+1,0);
+    f(i,1,n+1) ci>>a[i];
+    vector<ll>dp(n+1,-1e10),maxi(n+1,-1e10);
+    maxi[a[1]]=-1;dp[1]=0;
+    f(i,2,n+1)
+    {
+        dp[i]=dp[i-1];
+        dp[i]=max(dp[i],maxi[a[i]]+i+1);
+        maxi[a[i]]=max(maxi[a[i]],dp[i-1]-i);
+    }
+    co<<dp[n]<<endl;
 }
 
 int main()

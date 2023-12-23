@@ -44,14 +44,21 @@ typedef tree<int, null_type, less<int>, rb_tree_tag,
 // find_by_order(k) - k'th element in set.(0 indexed)(iterator)
 ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 
-
 void solve()
 {
-    ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
-    
-     
+    ci>>n; 
+    if(n&1)
+    {
+        f(i,0,n) co<<2<<' ';
+        en
+    }
+    else
+    {
+        co<<"1 3 ";
+        f(i,0,n-2) co<<2<<' ';
+        en
+    }
+
 }
 
 int main()
@@ -66,8 +73,8 @@ int main()
         cout << setprecision(10) << fixed;
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
-        t=1;
         ci>>t;
+        // t=1;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

@@ -47,9 +47,24 @@ ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 
 void solve()
 {
-    ci>>n;
-    vector<ll>a(n);
+    char ch;
+    ci>>n>>m>>ch;
+    vector<string>a(n);
     for(auto &x:a) ci>>x;
+    set<char>st;
+    f(i,0,n)
+    {
+        f(j,0,m)
+        {
+            if(a[i][j]==ch){
+                if(i!=0 and a[i-1][j]!=ch and a[i-1][j]!='.') st.insert(a[i-1][j]);
+                if(i!=n-1 and a[i+1][j]!=ch and a[i+1][j]!='.') st.insert(a[i+1][j]);
+                if(j!=0 and a[i][j-1]!=ch and a[i][j-1]!='.') st.insert(a[i][j-1]);
+                if(j!=m-1 and a[i][j+1]!=ch and a[i][j+1]!='.') st.insert(a[i][j+1]);
+            }
+        }
+    }
+    co<<st.size()<<endl;
     
      
 }
@@ -67,7 +82,7 @@ int main()
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         t=1;
-        ci>>t;
+        // ci>>t;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

@@ -48,8 +48,26 @@ ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 void solve()
 {
     ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
+    string a;
+    ci>>a;
+    int i=0,j=n-1;
+    x=0;
+    while(i<=j)
+    {
+        if(a[i]!=a[j])
+        {
+            x++;
+            while(i<=j and a[i]!=a[j])
+            {
+                i++;
+                j--;
+            }
+        }
+        i++;
+        j--;
+    }
+    if(x>1) co<<"No"<<endl;
+    else co<<"Yes"<<endl;
     
      
 }

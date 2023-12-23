@@ -44,13 +44,34 @@ typedef tree<int, null_type, less<int>, rb_tree_tag,
 // find_by_order(k) - k'th element in set.(0 indexed)(iterator)
 ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 
-
+ll call(ll nn)
+{
+    ll dsum=0;
+    while(nn)
+    {
+        dsum+=nn%10;
+        nn/=10;
+    }
+    return dsum;
+}
 void solve()
 {
-    ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
-    
+    string a;
+    ci>>a;
+    ll sum=0;res=0;
+    if(a.size()==1)
+    {
+        co<<0<<endl;
+        return;
+    }
+    else res++;
+    f(i,0,a.size()) sum+=(a[i]-'0');
+    while(sum>9)
+    {
+        res++;
+        sum=call(sum);
+    }
+    co<<res<<endl;
      
 }
 
@@ -67,7 +88,7 @@ int main()
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         t=1;
-        ci>>t;
+        // ci>>t;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

@@ -47,10 +47,20 @@ ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 
 void solve()
 {
-    ci>>n;
+    ci>>n>>m;
     vector<ll>a(n);
     for(auto &x:a) ci>>x;
-    
+    res=(a[m-1] == 1);
+    ll i=m-2,j=m;
+    while(i>=0 and j<n)
+    {
+        if(a[i]+a[j]==2) res+=2;
+        i--;
+        j++;
+    }
+    while(i>=0) res+=a[i],i--;
+    while(j<n) res+=a[j],j++;
+    co<<res<<endl;
      
 }
 
@@ -67,7 +77,7 @@ int main()
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         t=1;
-        ci>>t;
+        // ci>>t;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

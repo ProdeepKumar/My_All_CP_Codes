@@ -50,7 +50,17 @@ void solve()
     ci>>n;
     vector<ll>a(n);
     for(auto &x:a) ci>>x;
-    
+    ll crime_untreated=0,police_man=0;
+    f(i,0,n)
+    {
+        if(a[i]>0) police_man+=a[i];
+        else
+        {
+            if(police_man<1) crime_untreated++;
+            else police_man--;
+        }
+    }
+    co<<crime_untreated<<endl;
      
 }
 
@@ -67,7 +77,7 @@ int main()
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         t=1;
-        ci>>t;
+        // ci>>t;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

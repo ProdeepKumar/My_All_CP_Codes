@@ -1,67 +1,108 @@
-#include<iostream>
+#include<bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 using namespace std;
+#define ll         long long int
+#define co         cout
+#define ci         cin
+#define sf1(n)     scanf("%lld",&n)
+#define sf2(n,m)   scanf("%lld %lld",&n,&m)
+#define sf3(n,m,p) scanf("%lld %lld %lld",&n,&m,&p)
+#define pf1(n)     printf("%lld\n",n)
+#define mem(a,b)   memset(a,b,sizeof(a))
+#define en         cout<<endl;
+#define pb         push_back
+#define p_b        pop_back
+#define gcd(n,m)   __gcd(n,m)
+#define lcm(n,m)   ((n)/__gcd(n,m))*(m)
+#define kase       "Case "<<ka<<": "
+#define fi         first
+#define se         second
+#define coy        cout<< "YES"<<endl;
+#define con        cout<< "NO"<<endl;
+#define f(i,a,b)   for(ll i=a;i<b;i++)
+#define r(i,a,b)   for(ll i=a;i>=b;i--)
+#define all(x)     (x).begin(),(x).end()
+#define allr(x)    (x).rbegin(),(x).rend()
+#define pi         pair<ll,ll>
+#define br         break;
+#define i64        long long
+#define PI         2*acos(0.0)
+#define MAXN       3*100000
+#define INF        0x3f3f3f3f
+#define n_ones(a)  __builtin_popcountll(a);
+#define lz(a)      __builtin_clzll(a);
+#define tz(a)      __builtin_ctzll(a);
+#define debug(x)   cout<<#x"="<<(x)<<endl
 
-struct hole{
-    int startx,starty,endx,endy,cost;
-};
-hole a[10];
-int vis[15];
+//Policy Based Data Structure(Randomly access into set in log(n) time)
+// template <typename T>using orderedSet = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
+typedef tree<int, null_type, less<int>, rb_tree_tag,
+        tree_order_statistics_node_update>Set;
+// order_of_key(k) - number of element strictly less than k
+// find_by_order(k) - k'th element in set.(0 indexed)(iterator)
+ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,b,d,s,t;
 
-int t,n,sourcex,sourcey,destx,desty;
-int dist(int xx,int yy,int xxx,int yyy)
+
+
+void solve()
 {
-    return abs(xx-xxx)+abs(yy-yyy);
-}
-int call(int i,int j,int sum)
-{
-    if(i==destx && j==desty)
+    ci>>n;
+    vector<ll>a(n);
+    f(i,0,n) ci>>a[i];
+    ll lo=-1e18,hi=1e18,mid;
+    mx=-1e18;
+    while(lo<=hi)
     {
-        return sum;
-    }
-    int res=1e5;
-    for(int ii=0;ii<=n;ii++)
-    {
-        if(vis[ii]==0)
+        mid=(lo+hi)/2;       
+        x=0;
+        f(i,0,n)
         {
-            vis[ii]=1;
-            if(a[ii].startx==destx && a[ii].starty==desty)
+            if(a[i]>0) x+=a[i];
+            else if(x>=mid)
             {
-                int xx=call(destx,desty,sum+dist(i,j,destx,desty));
-                res=min(res,xx);
+                if(x+a[i]<mid) x=mid;
+                else x+=a[i];
             }
-            else
-            {
-                int xx=call(a[ii].endx,a[ii].endy,sum+dist(i,j,a[ii].startx,a[ii].starty)+a[ii].cost);
-                int yy=call(a[ii].startx,a[ii].starty,sum+dist(i,j,a[ii].endx,a[ii].endy)+a[ii].cost);
-                res=min(res,min(xx,yy));
-            }
-            vis[ii]=0;
+            else x+=a[i];
         }
+        if(x>=mid) 
+        {
+            if(x>mx)
+            {
+                mx=x;
+                res=mid;
+            }
+            lo=mid+1;
+        }
+        else hi=mid-1;
     }
-    return res;
-
+    co<<res<<endl;
+    
+     
 }
+
 int main()
 {
-    cin>>t;
-    cin>>n>>sourcex>>sourcey>>destx>>desty;
-    while(t--)
-    {
-        for(int i=0;i<n;i++)
+        
+//#ifdef LOCAL
+        //freopen("input.txt","r",stdin);
+        //freopen("output.txt","w",stdout);
+        auto start_time = clock();
+        cerr << setprecision(3) << fixed;
+//#endif
+        cout << setprecision(10) << fixed;
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        t=1;
+        ci>>t;
+        for(ll ca=0;ca<t;ca++)
         {
-            vis[i]=0;
-            int ak,dui,tin,car,pach;
-            cin>>ak>>dui>>tin>>car>>pach;
-            a[i].startx=ak;
-            a[i].starty=dui;
-            a[i].endx=tin;
-            a[i].endy=car;
-            a[i].cost=pach;
+            solve();
         }
-        vis[n]=0;
-        a[n].startx=destx;
-        a[n].starty=desty;
-        a[n].endx=a[n].endy=a[n].cost=0;
-        cout<<call(sourcex,sourcey,0)<<endl;
-    }
+//#ifdef LOCAL
+        auto end_time = clock();
+        cerr<< "Execution time: "<<(end_time-start_time)*(int)1e3/CLOCKS_PER_SEC<<" ms\n";
+//#endif
 }

@@ -47,10 +47,30 @@ ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 
 void solve()
 {
-    ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
-    
+    ci>>n>>m;
+    vector<pi>a(m);
+    f(i,0,m)
+    {
+        ci>>x>>y;
+        a[i]={y,x};
+    }
+    sort(allr(a));
+    // for(auto ii:a) co<<ii.fi<<' '<<ii.se<<endl;
+    ll remaining=n;res=0;
+    for(auto ii:a)
+    {
+        if(ii.se<remaining)
+        {
+            res+=ii.fi*ii.se;
+            remaining-=ii.se;
+        }
+        else
+        {
+            res+=remaining*ii.fi;
+            br
+        }
+    }
+    co<<res<<endl;
      
 }
 
@@ -67,7 +87,7 @@ int main()
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         t=1;
-        ci>>t;
+        // ci>>t;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

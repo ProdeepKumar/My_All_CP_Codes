@@ -44,14 +44,72 @@ typedef tree<int, null_type, less<int>, rb_tree_tag,
 // find_by_order(k) - k'th element in set.(0 indexed)(iterator)
 ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 
+vector<pi>fact;
+
+void factorize(long long n) 
+{ 
+    int count = 0;  
+    while (!(n % 2)) { 
+        n >>= 1;  
+        count++; 
+    } 
+    if (count) 
+        fact.pb({2,count}); 
+  
+    for (long long i = 3; i <= sqrt(n); i += 2) { 
+        count = 0; 
+        while (n % i == 0) { 
+            count++; 
+            n = n / i; 
+        } 
+        if (count) 
+            fact.pb({i,count});
+    } 
+  
+    if (n > 2) 
+        fact.pb({n,1});
+}
 
 void solve()
 {
-    ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
-    
-     
+    ci>>n>>x;
+    ll a[n+1]={0};
+    a[n]=1;
+    a[1]=x;
+    if(x==n)
+    {
+        f(i,2,n) a[i]=i;
+        f(i,1,n+1) co<<a[i]<<' ';
+        en
+    }
+    else
+    {
+        if(n%x) 
+        {
+            co<<-1<<endl;
+            return;
+        }
+        else
+        {
+            fact.clear();
+            factorize(n/x);
+            vector<ll>tmp;
+            for(auto ii:fact)
+            {
+                f(i,0,ii.se) tmp.pb(ii.fi);
+            }
+            sort(all(tmp));
+            // for(ll II:tmp) co<<II<<' ';
+            // en
+            vector<ll>pos;
+            pos.pb(x);
+            for(ll ii:tmp) pos.pb(pos.back()*ii);
+            for(int i=0;i<pos.size()-1;i++) a[pos[i]]=pos[i+1];
+            f(i,1,n+1) if(a[i]==0) a[i]=i;
+            f(i,1,n+1) co<<a[i]<<' ';
+            en
+        }
+    }
 }
 
 int main()
@@ -66,8 +124,8 @@ int main()
         cout << setprecision(10) << fixed;
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
-        t=1;
         ci>>t;
+        // t=1;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

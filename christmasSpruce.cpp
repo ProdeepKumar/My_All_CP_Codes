@@ -44,14 +44,45 @@ typedef tree<int, null_type, less<int>, rb_tree_tag,
 // find_by_order(k) - k'th element in set.(0 indexed)(iterator)
 ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 
+vector<ll>tr[2000];
+ll vis[2000]={0};
+
+bool dfs(ll u)
+{
+    // vis[u]=1;
+    // if(tr[u].empty()) return true;
+    ll cnt=0;
+    for(auto v:tr[u])
+    {
+        if(tr[v].empty()) cnt++;
+    }
+    // co<<cnt<<endl;
+    if(cnt<3) return false;
+    else return true;
+}
 
 void solve()
 {
     ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
-    
-     
+    f(i,1,n)
+    {
+        ci>>x;
+        tr[x].pb(i+1);
+        // tr[i+1].pb(x);
+    }
+    // for(int i=1;i<=n;i++)
+    // {
+    //     co<<i<<": "<<endl;
+    //     for(auto ii:tr[i]) co<<ii<<' ';
+    //     en
+    // }
+    res=true;
+    for(int i=1;i<=n;i++)
+    {
+       if(!tr[i].empty()) res=(res and dfs(i));
+    }
+    if(res) cout<<"Yes"<<endl;
+    else cout<<"No"<<endl;
 }
 
 int main()
@@ -67,7 +98,7 @@ int main()
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         t=1;
-        ci>>t;
+        // ci>>t;
         for(ll ca=0;ca<t;ca++)
         {
             solve();

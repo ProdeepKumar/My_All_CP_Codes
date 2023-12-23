@@ -47,10 +47,43 @@ ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 
 void solve()
 {
-    ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
-    
+    ci>>n>>m;ll ans=-1;
+    vector<pi>segs(m);
+    f(i,0,m)
+    {
+        ci>>x>>y;
+        segs[i]={x,y};  // 1 0 0 1 0
+    }
+    ci>>q;
+    vector<ll>pos(q);
+    f(i,0,q) ci>>pos[i],pos[i]--;
+    ll lo=0,hi=q-1,mid;
+    while(lo<=hi)
+    {
+        mid=(hi+lo)/2;
+        vector<ll>a(n,0);
+        f(i,0,mid+1) a[pos[i]]=1;
+        vector<ll>cum(n+1,0);
+        f(i,1,n+1) cum[i]=cum[i-1]+a[i-1];
+        ll paici=0;
+        for(auto ii:segs)
+        {
+            ll one=cum[ii.se]-cum[ii.fi-1];
+            ll zero=ii.se-ii.fi+1-one;
+            if(one>zero)
+            {
+                paici=1;
+                br
+            }
+        }
+        if(paici) 
+        {
+            hi=mid-1;
+            ans=mid+1;
+        }
+        else lo=mid+1;
+    }
+    co<<ans<<endl;
      
 }
 

@@ -50,7 +50,25 @@ void solve()
     ci>>n;
     vector<ll>a(n);
     for(auto &x:a) ci>>x;
-    
+    res=a[0];
+    f(i,1,n) res&=a[i];   
+    if(res>0)
+    {
+        co<<1<<endl;
+        return;
+    }
+    ll cnt=0;
+    res=a[0];
+    f(i,0,n) 
+    {
+        res&=a[i];
+        if(res==0)
+        {
+            cnt++;
+            if(i+1<n) res=a[i+1];
+        }
+    }
+    co<<cnt<<endl;
      
 }
 

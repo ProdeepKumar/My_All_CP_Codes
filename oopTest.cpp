@@ -44,12 +44,30 @@ typedef tree<int, null_type, less<int>, rb_tree_tag,
 // find_by_order(k) - k'th element in set.(0 indexed)(iterator)
 ll n,m,k,g,mx,mn,res,c,x,y,z,w,p,q,r,b,d,l,s,t;
 
+class Employee
+{
+public:
+    std::string m_name {};
+    int m_id {};
+    double m_wage {};
 
+    // Print employee information to the screen
+    void print()
+    {
+        std::cout << "Name: " << m_name <<
+                "  Id: " << m_id <<
+                "  Wage: $" << m_wage << '\n';
+    }
+};
 void solve()
 {
-    ci>>n;
-    vector<ll>a(n);
-    for(auto &x:a) ci>>x;
+       // Declare two employees
+    Employee alex { "Alex", 1, 25.00 };
+    Employee joe { "Joe", 2, 22.25 };
+
+    // Print out the employee information
+    alex.print();
+    joe.print();
     
      
 }
@@ -67,7 +85,7 @@ int main()
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         t=1;
-        ci>>t;
+        // ci>>t;
         for(ll ca=0;ca<t;ca++)
         {
             solve();
